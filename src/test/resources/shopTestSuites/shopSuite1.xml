@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Shop Mobile Recharges" parallel="false">
+
+	<test name="Prepaid Mobile Recharge">
+		<classes>
+			<class name="com.Shop.mobileRecharge.TC_PrepaidMobile"></class>
+		</classes>
+	</test>
+
+	<test name="Postpaid Mobile Recharge">
+		<classes>
+			<class name="com.Shop.mobileRecharge.TC_PostpaidMobile"></class>
+		</classes>
+	</test>
+
+	<test name="DTH Recharge">
+		<classes>
+			<class name="com.Shop.dthRecharge.TC_DthRecharge"></class>
+		</classes>
+	</test>
+
+</suite>

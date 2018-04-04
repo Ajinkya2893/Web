@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Remit Sender Details" parallel="true">
+
+	<test name="AddNewSender">
+		<classes>
+			<class name="com.remit.SenderDetails.AddSender"></class>
+		</classes>
+	</test>
+
+	<test name="AddBeneficiary">
+		<classes>
+			<class name="com.remit.SenderDetails.AddBeneficiaryDetails"></class>
+		</classes>
+	</test>
+
+	<test name="ExistingSender">
+		<classes>
+			<class name="com.remit.SenderDetails.ExistingSender"></class>
+		</classes>
+	</test>
+	
+	<test name="CheckLimit">
+		<classes>
+			<class name="com.remit.SenderDetails.CheckLimit"></class>
+		</classes>
+	</test>
+</suite>

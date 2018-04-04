@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Remit Money Transfer" parallel="false">
+
+	<test name="User Login">
+		<classes>
+			<class name="com.remit.login.LoginWeb"></class>
+		</classes>
+	</test>
+
+	<test name="Transfer Money">
+		<classes>
+			<class name="com.remit.transfer.TransferMoney"></class>
+		</classes>
+	</test>
+
+	<test name="Validate Transfered Money">
+		<classes>
+			<class name="com.remit.Reports.ValidateTransfer"></class>
+		</classes>
+	</test>
+
+	<test name="DeleteBeneficiary">
+		<classes>
+			<class name="com.remit.SenderDetails.DeleteBeneficary"></class>
+		</classes>
+	</test>
+</suite>

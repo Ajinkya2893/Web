@@ -1,0 +1,18 @@
+#URL
+vpc_url= http://dmtweb.pay1.in/
+
+
+#textfields and Buttons
+#######LOGIN#########
+loginPanel_xpath = //*[@id='loginmodal
+username_id = loginmobile
+password_id = loginpassword
+loginButton_xpath = //*[@id='frmLogin']/div[2]/button
+
+#######otpscreen########
+otp_id = login-otp
+otpButton_xpath = //*[@id='frmloginotp']/div[2]/button
+
+
+
+

@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Remit">
+
+	<suite-files>
+
+		<suite-file path="src/test/resources/remitTestSuites/remitSuite1.xml" />
+		<suite-file path="src/test/resources/remitTestSuites/remitSuite2.xml" />
+		
+	</suite-files>
+	
+</suite>
