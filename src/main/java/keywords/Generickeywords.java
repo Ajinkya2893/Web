@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -62,14 +63,16 @@ public class Generickeywords extends Utility{
 						System.out.println("Opening Mozilla firefox browser");
 					}else if(browserType.equals("Chrome")){
 						System.setProperty("webdriver.chrome.driver", Constants.ChromeDriver_path);
-						driver = new ChromeDriver();  
+						ChromeOptions ChromeOptions = new ChromeOptions();
+						ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+						driver = new ChromeDriver(ChromeOptions);  
 						msg = "Successfully created a instance of chrome ";test.log(LogStatus.INFO, msg);
 					}else if(browserType.equals("ie")){
 						System.setProperty("webdriver.ie.driver", "F:\\drivers\\IEDriverServer.exe");
 						driver =  new InternetExplorerDriver();
 						msg= "Successfully created a instance of IE ";test.log(LogStatus.INFO, msg);
 					}
-				} else {
+				}else{
 					System.out.println("browserType is not mentioned in the excelsheet or properties"); 
 					test.log(LogStatus.ERROR, "browserType is not mentioned in the excelsheet or properties");}
 			}
@@ -227,7 +230,7 @@ public class Generickeywords extends Utility{
 					System.out.println(text);
 					msg = "Successfully Fetched the value " + Constants.PASS;
 					test.log(LogStatus.PASS, msg + text);
-					
+
 				}
 				return msg;
 			}else{

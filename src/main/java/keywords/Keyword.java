@@ -1,7 +1,11 @@
 package keywords;
 
+import static org.testng.Assert.assertThrows;
+
 import java.util.Hashtable;
+
 import com.relevantcodes.extentreports.ExtentTest;
+
 import Utility.Constants;
 import Utility.DataUtils;
 import Utility.Excel_Reader;
@@ -103,6 +107,7 @@ public class Keyword {
 			}else if(result.endsWith(Constants.FAIL)) {
 				DataUtils.reportFinalData(xls, Constants.KEYWORDS_SHEET, rNum, result);
 				msg=result;
+				assertThrows(null);
 			}
 			return msg;
 		}catch(Exception e) {

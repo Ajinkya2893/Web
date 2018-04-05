@@ -32,7 +32,7 @@ public interface BaseClass {
 				msg = app.executeKeywords(testName, xls, data, path);
 			}
 			return msg;
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			msg = "Unable to execute any test from the Interface "+Constants.FAIL;
 			return msg;

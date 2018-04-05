@@ -3,7 +3,7 @@ package Utility;
 public class Constants {
 
 	//Driver paths 
-	public static final String ChromeDriver_path = System.getProperty("user.dir")+"/Drivers/ChromeDriver/chromedriver";
+	public static final String ChromeDriver_path = System.getProperty("user.dir")+"//Drivers//ChromeDriver//chromedriver";
 	public static final String GeckoDriver_path = System.getProperty("user.dir")+"/Drivers/GeckoDriver/geckodriver";
 	public static final String InternetExplorer_Driver_path ="";
 	
