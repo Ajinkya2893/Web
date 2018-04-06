@@ -65,7 +65,12 @@ public class Generickeywords extends Utility{
 						System.setProperty("webdriver.chrome.driver", Constants.ChromeDriver_path);
 						ChromeOptions ChromeOptions = new ChromeOptions();
 						ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
-						driver = new ChromeDriver(ChromeOptions);  
+						driver = new ChromeDriver(ChromeOptions);
+						/*DesiredCapabilities capabilities = new DesiredCapabilities();
+						capabilities.setCapability(
+								PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, 
+								System.getProperty("user.dir") + "/Drivers/PhantomJs/phantomjs.exe");
+						driver = new PhantomJSDriver(capabilities);*/
 						msg = "Successfully created a instance of chrome ";test.log(LogStatus.INFO, msg);
 					}else if(browserType.equals("ie")){
 						System.setProperty("webdriver.ie.driver", "F:\\drivers\\IEDriverServer.exe");
@@ -78,6 +83,7 @@ public class Generickeywords extends Utility{
 			}
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+			System.out.println(msg);
 			return msg + Constants.PASS;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -90,6 +96,7 @@ public class Generickeywords extends Utility{
 		try {
 			test.log(LogStatus.INFO, "Closing the Browser");
 			driver.close();
+			System.out.println("Closing the browser");
 			return Constants.PASS;
 		}catch(Exception e) {
 			e.printStackTrace();

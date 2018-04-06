@@ -56,8 +56,8 @@ public class TC_WaterBill extends ShopSuiteRun implements BaseClass{
 	@Test(dataProvider="getData", priority=1)
 	public void Recharge(Hashtable<String,String> data) {
 		try {
-			result = execute(data, test, app, xls, testName, objectRepoPath);
 			count++;
+			result = execute(data, test, app, xls, testName, objectRepoPath);
 			if(result.endsWith(Constants.PASS)){
 				msg="Test got Successfully Passed";
 				fail=false;

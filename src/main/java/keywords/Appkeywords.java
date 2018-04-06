@@ -22,6 +22,7 @@ public class Appkeywords extends Generickeywords {
 
 	public String Login(String username, String Password){
 		try {
+			takeScreenShot("Aji");
 			if(getElement("loginPanel_xpath").isDisplayed()) {
 				getElement("username_id").sendKeys(username);test.log(LogStatus.INFO, "Entering Username "+username);
 				getElement("password_id").sendKeys(Password); test.log(LogStatus.INFO, "Entering Password "+Password);
@@ -32,7 +33,7 @@ public class Appkeywords extends Generickeywords {
 				if(gotLogin) 
 					msg = Loginotp();
 				takeScreenShot(msg + Constants.PASS);
-			}else{
+			}else if (getElement("loginButtonheader_xpath").isDisplayed()) {
 				getElement("loginButtonheader_xpath").click();
 				Thread.sleep(2000);
 				Login(username, Password);

@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Utility" parallel="false">
+<suite name="Utility Recharges" parallel="false">
 
 	<test name="Electricity">
 		<classes>

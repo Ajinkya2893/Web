@@ -1,8 +1,8 @@
 package keywords;
 
-import static org.testng.Assert.assertThrows;
-
 import java.util.Hashtable;
+
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 
@@ -107,7 +107,7 @@ public class Keyword {
 			}else if(result.endsWith(Constants.FAIL)) {
 				DataUtils.reportFinalData(xls, Constants.KEYWORDS_SHEET, rNum, result);
 				msg=result;
-				assertThrows(null);
+				Assert.fail("Fail because "+msg);
 			}
 			return msg;
 		}catch(Exception e) {
