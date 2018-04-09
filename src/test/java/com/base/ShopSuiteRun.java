@@ -2,8 +2,8 @@ package com.base;
 
 import java.io.File;
 
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
@@ -22,7 +22,7 @@ public class ShopSuiteRun {
 		if (!report.isDirectory()) report.delete();
 	}
 	
-	@AfterSuite
+	/*@AfterSuite
 	public void afterSuite() {
 		try {
 			rep.flush();
@@ -31,5 +31,5 @@ public class ShopSuiteRun {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

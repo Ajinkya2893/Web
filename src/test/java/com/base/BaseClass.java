@@ -33,8 +33,8 @@ public interface BaseClass {
 				msg = app.executeKeywords(testName, xls, data, path);
 			}
 			return msg;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (AssertionError e) {
+			//e.printStackTrace();
 			msg = "Unable to execute any test from the Interface "+Constants.FAIL;
 			return msg;
 		}

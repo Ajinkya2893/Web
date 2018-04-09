@@ -9,7 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -55,12 +57,15 @@ public class Generickeywords extends Utility{
 			else{		
 				if(browserType!=null){
 					if(browserType.equals("Mozilla")){
+						FirefoxBinary firefoxBinary = new FirefoxBinary();
+					    firefoxBinary.addCommandLineOptions("--headless");
 						System.setProperty("webdriver.gecko.driver",Constants.GeckoDriver_path);
 						System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
 						System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
-						driver = new FirefoxDriver();
+					    FirefoxOptions firefoxOptions = new FirefoxOptions();
+					    firefoxOptions.setBinary(firefoxBinary);
+						driver = new FirefoxDriver(firefoxOptions);
 						msg = "Successfully created a instance of Mozilla ";test.log(LogStatus.INFO, msg);
-						System.out.println("Opening Mozilla firefox browser");
 					}else if(browserType.equals("Chrome")){
 						System.setProperty("webdriver.chrome.driver", Constants.ChromeDriver_path);
 						ChromeOptions ChromeOptions = new ChromeOptions();

@@ -56,7 +56,6 @@ public class Appkeywords extends Generickeywords {
 
 	public String Loginotp() {
 		try {
-			Thread.sleep(5000);
 			if(getElement("otp_Panel_xpath").isDisplayed()){
 				@SuppressWarnings("resource")
 				Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -70,7 +69,7 @@ public class Appkeywords extends Generickeywords {
 				return msg + Constants.PASS;
 			}
 			msg ="NO Otp Panel Displayed ";test.log(LogStatus.INFO, msg);
-			return msg + Constants.FAIL;
+			return msg + Constants.PASS;
 		}catch (Exception e) {
 			e.printStackTrace(); 
 			System.out.println("NO OTP PANEL ");
@@ -81,7 +80,6 @@ public class Appkeywords extends Generickeywords {
 
 	public String AddSenderOTP(String OtpNumber, Hashtable<String, String>data) {
 		try {
-
 			if(getElement("addSender_Name_id").isDisplayed()) {
 				getElement("addSender_Name_id").sendKeys(data.get("SenderName"));
 				@SuppressWarnings("resource")

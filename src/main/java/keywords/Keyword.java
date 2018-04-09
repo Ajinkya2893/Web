@@ -25,7 +25,7 @@ public class Keyword {
 			String testUnderExecution,
 			Excel_Reader xls,
 			Hashtable<String,String> testData,
-			String path) throws InterruptedException{
+			String path) throws AssertionError{
 
 
 		app = new Appkeywords(test, path);
@@ -106,6 +106,7 @@ public class Keyword {
 				msg=result;
 			}else if(result.endsWith(Constants.FAIL)) {
 				DataUtils.reportFinalData(xls, Constants.KEYWORDS_SHEET, rNum, result);
+				app.takeScreenShot(Constants.FAIL);
 				msg=result;
 				Assert.fail("Fail because "+msg);
 			}
