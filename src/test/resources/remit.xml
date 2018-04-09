@@ -1,11 +1,52 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Remit">
+<suite name="Remit" parallel="false">
 
-	<suite-files>
+	<test name="AddNewSender">
+		<classes>
+			<class name="com.remit.SenderDetails.AddSender"></class>
+		</classes>
+	</test>
 
-		<suite-file path="src/test/resources/remitTestSuites/remitSuite1.xml" />
-		<suite-file path="src/test/resources/remitTestSuites/remitSuite2.xml" />
-		
-	</suite-files>
-	
+	<test name="AddBeneficiary">
+		<classes>
+			<class name="com.remit.SenderDetails.AddBeneficiaryDetails"></class>
+		</classes>
+	</test>
+
+	<test name="ExistingSender">
+		<classes>
+			<class name="com.remit.SenderDetails.ExistingSender"></class>
+		</classes>
+	</test>
+
+	<test name="CheckLimit">
+		<classes>
+			<class name="com.remit.SenderDetails.CheckLimit"></class>
+		</classes>
+	</test>
+
+	<test name="User Login">
+		<classes>
+			<class name="com.remit.login.LoginWeb"></class>
+		</classes>
+	</test>
+
+	<test name="Transfer Money">
+		<classes>
+			<class name="com.remit.transfer.TransferMoney"></class>
+		</classes>
+	</test>
+
+	<test name="Validate Transfered Money">
+		<classes>
+			<class name="com.remit.Reports.ValidateTransfer"></class>
+		</classes>
+	</test>
+
+	<test name="DeleteBeneficiary">
+		<classes>
+			<class name="com.remit.SenderDetails.DeleteBeneficary"></class>
+		</classes>
+	</test>
+
 </suite>

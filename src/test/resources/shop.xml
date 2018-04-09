@@ -1,7 +1,44 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Remit">
-	<suite-files>
-		<suite-file path="src/test/resources/shopTestSuites/shopSuite1.xml" />
-		<suite-file path="src/test/resources/shopTestSuites/shopSuite2.xml" />
-	</suite-files>
+<suite name="Remit" parallel="false">
+	<test name="Prepaid Mobile Recharge">
+		<classes>
+			<class name="com.Shop.mobileRecharge.TC_PrepaidMobile"></class>
+		</classes>
+	</test>
+
+	<test name="Postpaid Mobile Recharge">
+		<classes>
+			<class name="com.Shop.mobileRecharge.TC_PostpaidMobile"></class>
+		</classes>
+	</test>
+
+	<test name="DTH Recharge">
+		<classes>
+			<class name="com.Shop.dthRecharge.TC_DthRecharge"></class>
+		</classes>
+	</test>
+
+	<test name="Electricity">
+		<classes>
+			<class name="com.Shop.Electricity.TC_Electricity"></class>
+		</classes>
+	</test>
+
+	<test name="Gas">
+		<classes>
+			<class name="com.Shop.Gas.TC_GasBill"></class>
+		</classes>
+	</test>
+
+	<test name="Water">
+		<classes>
+			<class name="com.Shop.Water.TC_WaterBill"></class>
+		</classes>
+	</test>
+
+	<test name="LandLine">
+		<classes>
+			<class name="com.Shop.Landline.TC_Landline"></class>
+		</classes>
+	</test>
 </suite>
