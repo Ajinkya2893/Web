@@ -16,8 +16,10 @@ public class RemitSuiteRun {
 
 	@BeforeSuite
 	public void beforeSuite() {
-		File myFile = new File(Constants.DesPath);
+		File myFile = new File(Constants.SrcPath);
 		if (!myFile.isDirectory()) myFile.delete();
+		File Zipfolder = new File(Constants.DesPath);
+		if (!Zipfolder.isDirectory()) Zipfolder.delete();
 	}
 	
 	/*@AfterSuite
