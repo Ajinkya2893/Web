@@ -58,7 +58,7 @@ public class Generickeywords extends Utility{
 				if(browserType!=null){
 					if(browserType.equals("Mozilla")){
 						FirefoxBinary firefoxBinary = new FirefoxBinary();
-					   // firefoxBinary.addCommandLineOptions("--headless");
+					    firefoxBinary.addCommandLineOptions("--headless");
 						System.setProperty("webdriver.gecko.driver",Constants.GeckoDriver_path);
 						System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
 						System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
