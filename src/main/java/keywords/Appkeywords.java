@@ -61,10 +61,10 @@ public class Appkeywords extends Generickeywords {
 				Scanner reader = new Scanner(System.in);  // Reading from System.in
 				System.out.println("Enter a number: ");
 				int n = reader.nextInt();
-				reader.reset();
 				getElement("otp_id").sendKeys(Integer.toString(n));  test.log(LogStatus.INFO, "Entered the Value");
 				getElement("otpButton_xpath").click(); test.log(LogStatus.PASS, "Successfully entered the OTP");
 				gotLogin = false;
+				reader.reset();
 				msg = "Entered the Values in the Field ";
 				return msg + Constants.PASS;
 			}
@@ -141,6 +141,7 @@ public class Appkeywords extends Generickeywords {
 				driver.switchTo().alert().dismiss();
 				msg = "DIsmissing the Alert Option ";test.log(LogStatus.INFO, msg);
 			}
+			System.out.println("Already added");
 			return msg+Constants.PASS;
 		}catch (Exception e) {
 			e.getStackTrace();

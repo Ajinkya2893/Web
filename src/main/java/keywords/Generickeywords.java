@@ -58,7 +58,7 @@ public class Generickeywords extends Utility{
 				if(browserType!=null){
 					if(browserType.equals("Mozilla")){
 						FirefoxBinary firefoxBinary = new FirefoxBinary();
-					    firefoxBinary.addCommandLineOptions("--headless");
+					   // firefoxBinary.addCommandLineOptions("--headless");
 						System.setProperty("webdriver.gecko.driver",Constants.GeckoDriver_path);
 						System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
 						System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
@@ -88,7 +88,7 @@ public class Generickeywords extends Utility{
 			}
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
-			System.out.println(msg);
+		//	System.out.println(msg);
 			return msg + Constants.PASS;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +100,7 @@ public class Generickeywords extends Utility{
 	public String closeBrowser() {
 		try {
 			test.log(LogStatus.INFO, "Closing the Browser");
-			driver.close();
+			driver.quit();
 			System.out.println("Closing the browser");
 			return Constants.PASS;
 		}catch(Exception e) {
