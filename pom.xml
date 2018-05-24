@@ -23,7 +23,7 @@
 				<version>2.21.0</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/remit.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>src/test/resources/remit.xml</suiteXmlFile> -->
 						<suiteXmlFile>src/test/resources/shop.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
@@ -41,6 +41,13 @@
 	</build>
 
 	<dependencies>
+		<!-- <dependencyManagement> <dependencies> <dependency> <groupId>org.arquillian.cube</groupId> 
+			<artifactId>arquillian-cube-bom</artifactId> <version>1.15.3</version> <scope>import</scope> 
+			<type>pom</type> </dependency> </dependencies> </dependencyManagement> <dependency> 
+			<groupId>org.arquillian.cube</groupId> <artifactId>arquillian-cube-docker</artifactId> 
+			<scope>test</scope> <type>pom</type> </dependency> <dependency> <groupId>org.arquillian.cube</groupId> 
+			<artifactId>arquillian-cube-docker-drone</artifactId> <scope>test</scope> 
+			<type>pom</type> </dependency> -->
 
 		<!-- Java mail api -->
 		<dependency>
@@ -56,11 +63,11 @@
 			<!-- <scope>test</scope> -->
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
-  			<groupId>org.slf4j</groupId>
-    			<artifactId>slf4j-simple</artifactId>
-   			<version>1.7.12</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.12</version>
 		</dependency>
 
 		<dependency>
@@ -150,6 +157,40 @@
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>1.4.01</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>spring-mock-mvc</artifactId>
+			<version>3.1.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>3.1.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-path</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>3.1.0</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

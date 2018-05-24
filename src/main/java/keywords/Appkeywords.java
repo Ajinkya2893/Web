@@ -1,14 +1,25 @@
 package keywords;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.openqa.selenium.By;
+import org.testng.SkipException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import Utility.AESCrypt;
 import Utility.Constants;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 
 public class Appkeywords extends Generickeywords {
 
@@ -38,6 +49,9 @@ public class Appkeywords extends Generickeywords {
 				Thread.sleep(2000);
 				Login(username, Password);
 			}
+			if(getElement("checkLogin_xpath").getText().equalsIgnoreCase("Login"))
+				throw new SkipException("Logging Failed");
+
 			return msg;
 		}
 		catch (Exception e){
@@ -57,14 +71,9 @@ public class Appkeywords extends Generickeywords {
 	public String Loginotp() {
 		try {
 			if(getElement("otp_Panel_xpath").isDisplayed()){
-				@SuppressWarnings("resource")
-				Scanner reader = new Scanner(System.in);  // Reading from System.in
-				System.out.println("Enter a number: ");
-				int n = reader.nextInt();
-				getElement("otp_id").sendKeys(Integer.toString(n));  test.log(LogStatus.INFO, "Entered the Value");
+				getElement("otp_id").sendKeys(getOtpNumber());  test.log(LogStatus.INFO, "Entered the Value");
 				getElement("otpButton_xpath").click(); test.log(LogStatus.PASS, "Successfully entered the OTP");
 				gotLogin = false;
-				reader.reset();
 				msg = "Entered the Values in the Field ";
 				return msg + Constants.PASS;
 			}
@@ -175,6 +184,57 @@ public class Appkeywords extends Generickeywords {
 		}catch(Exception e){
 			e.printStackTrace();
 			return Constants.FAIL;
+		}
+	}
+
+	public String getOtpNumber(String env, String app) {
+		String encrypted;
+		String body;
+		String otp = "";
+		try {
+
+			RestAssured.baseURI = "https://paneluat.pay1.in";
+			RestAssured.basePath = "/platform/apis/";
+
+			ObjectMapper om = new ObjectMapper();
+			om.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS,false);
+
+			SortedMap<String,String> sortedMap = new TreeMap<String,String>();
+			Map<String,String> map = new HashMap<String,String>();
+
+			map.put("method","getOTPforTest");
+			if(app.equalsIgnoreCase("shop")) {
+				map.put("app_name","recharge_app");
+			}else if (app.equalsIgnoreCase("remit")) {
+				map.put("app_name","dmt");
+			}
+			map.put("mobile","7101000521");
+
+			sortedMap.putAll(map);
+			System.out.println();
+			encrypted = new AESCrypt(env).encrypt(om.writeValueAsString(sortedMap));
+
+			Response response  = RestAssured.given()
+					.param("req",encrypted)
+					.when()
+					.post()
+					.then()
+					.extract().response();
+
+			System.out.println(response.asString());
+			body = response.asString();
+
+			if("failure".equals(new JsonPath(body).get("status"))) {
+				System.out.println("Transaction Already Done");
+			}else if("success".equals(new JsonPath(body).get("status"))) {
+				otp = new JsonPath(body).get("otp");
+				System.out.println(otp);
+			}
+			return otp;
+		}
+		catch (Exception e) {
+			System.out.println("Error ");
+			return null;
 		}
 	}
 }

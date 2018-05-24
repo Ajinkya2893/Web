@@ -2,7 +2,6 @@ package com.base;
 
 import java.io.File;
 
-import org.testng.annotations.AfterSuite;
 import org.zeroturnaround.zip.ZipUtil;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -24,7 +23,7 @@ public class ShopSuiteRun {
 		if (!report.isDirectory()) report.delete();
 	}*/
 	
-	@AfterSuite
+	//@AfterSuite
 	public void afterSuite() {
 		try {
 			rep.flush();

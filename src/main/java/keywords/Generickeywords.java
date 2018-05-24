@@ -38,25 +38,25 @@ public class Generickeywords extends Utility{
 	public String openBrowser(String browserType){
 		test.log(LogStatus.INFO, "Starting "+browserType+ " Browser");
 		try {
-			if(prop.getProperty("grid").equals("Y")){
+			if(prop.getProperty("grid").equalsIgnoreCase("Y")){
 				DesiredCapabilities cap=null;
 				if(browserType.equals("Mozilla")){
 					cap = DesiredCapabilities.firefox();
 					cap.setBrowserName("firefox");
 					cap.setJavascriptEnabled(true);
-					cap.setPlatform(org.openqa.selenium.Platform.WINDOWS);
+					cap.setPlatform(org.openqa.selenium.Platform.LINUX);
 
-				}else if(browserType.equals("Chrome")){
+				}else if(browserType.equalsIgnoreCase("Chrome")){
 					cap = DesiredCapabilities.chrome();
 					cap.setBrowserName("chrome");
-					cap.setPlatform(org.openqa.selenium.Platform.WINDOWS);
+					cap.setPlatform(org.openqa.selenium.Platform.LINUX);
 				}
 				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap); 
 				test.log(LogStatus.PASS, "Successfully launched GRID Server");
 			} 
 			else{		
 				if(browserType!=null){
-					if(browserType.equals("Mozilla")){
+					if(browserType.equalsIgnoreCase("Mozilla")){
 						FirefoxBinary firefoxBinary = new FirefoxBinary();
 					    firefoxBinary.addCommandLineOptions("--headless");
 						System.setProperty("webdriver.gecko.driver",Constants.GeckoDriver_path);
@@ -66,18 +66,13 @@ public class Generickeywords extends Utility{
 					    firefoxOptions.setBinary(firefoxBinary);
 						driver = new FirefoxDriver(firefoxOptions);
 						msg = "Successfully created a instance of Mozilla ";test.log(LogStatus.INFO, msg);
-					}else if(browserType.equals("Chrome")){
+					}else if(browserType.equalsIgnoreCase("Chrome")){
 						System.setProperty("webdriver.chrome.driver", Constants.ChromeDriver_path);
 						ChromeOptions ChromeOptions = new ChromeOptions();
-						ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+						//ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
 						driver = new ChromeDriver(ChromeOptions);
-						/*DesiredCapabilities capabilities = new DesiredCapabilities();
-						capabilities.setCapability(
-								PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, 
-								System.getProperty("user.dir") + "/Drivers/PhantomJs/phantomjs.exe");
-						driver = new PhantomJSDriver(capabilities);*/
 						msg = "Successfully created a instance of chrome ";test.log(LogStatus.INFO, msg);
-					}else if(browserType.equals("ie")){
+					}else if(browserType.equalsIgnoreCase("ie")){
 						System.setProperty("webdriver.ie.driver", "F:\\drivers\\IEDriverServer.exe");
 						driver =  new InternetExplorerDriver();
 						msg= "Successfully created a instance of IE ";test.log(LogStatus.INFO, msg);
@@ -88,7 +83,6 @@ public class Generickeywords extends Utility{
 			}
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
-		//	System.out.println(msg);
 			return msg + Constants.PASS;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -114,7 +108,7 @@ public class Generickeywords extends Utility{
 		try {
 
 			if(url!=null){
-				driver.get(prop.getProperty(url));
+				driver.get(prop.getProperty("Live_url"));
 				msg = "Successfully navigated to "+url+" ";
 				test.log(LogStatus.PASS, msg);
 				return msg + Constants.PASS;

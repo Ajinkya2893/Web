@@ -64,7 +64,7 @@ public class Keyword {
 					result = app.takeScreenShot(object);
 				else if(keyword.equals("Otp"))
 					result = app.AddSenderOTP(object, testData);
-				else if(keyword.equals("loginOtp"))
+				else if(keyword.equals("Loginotp"))
 					result = app.Loginotp();
 				else if(keyword.equals("GetText"))
 					result = app.getText(object);

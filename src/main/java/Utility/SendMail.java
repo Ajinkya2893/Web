@@ -23,7 +23,7 @@ public class SendMail{
 	@Test
 	public void sendMail() {
 
-		final String username = "ajinkya@mindsarray.com";
+		final String username = "ajinkya.gangawane@pay1.in";
 		final String password = "Ajiswap@2817";
 
 		Properties props = new Properties();
@@ -42,11 +42,11 @@ public class SendMail{
 
 		try {
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("ajinkya@mindsarray.com"));
+			message.setFrom(new InternetAddress("ajinkya.gangawane@pay1.in"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("anand@mindsarray.com"));
+					InternetAddress.parse("anand.bhatt@pay1.in"));
 			message.addRecipients(Message.RecipientType.CC, 
-					InternetAddress.parse("vijay.k@mindsarray.com"));
+					InternetAddress.parse("vijay.kadus@pay1.in"));
 			message.setSubject("Pay1 Automation Web Reports");
 			message.setText("PFA");
 

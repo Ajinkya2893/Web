@@ -1,0 +1,28 @@
+<arquillian xmlns="http://jboss.com/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+   <extension qualifier="docker">
+      <property name="serverVersion">1.27</property>
+      <property name="serverUri">tcp://10.11.12.13:2375</property>
+      <property name="dockerContainersFile">docker-compose.yml</property>
+   </extension>
+   <extension qualifier="webdriver">
+      <property name="remoteAddress">http://10.11.12.13:4444/wd/hub</property>
+      <property name="browser">firefox</property>
+      <property name="remote">true</property>
+      <property name="remoteReusable">true</property>
+   </extension>
+</arquillian>
+
+<dependencies>
+   <dependency>
+      <groupId>org.arquillian.cube</groupId>
+      <artifactId>arquillian-cube-docker</artifactId>
+      <scope>test</scope>
+      <type>pom</type>
+   </dependency>
+   <dependency>
+      <groupId>org.arquillian.cube</groupId>
+      <artifactId>arquillian-cube-docker-drone</artifactId>
+      <scope>test</scope>
+      <type>pom</type>
+   </dependency>
+</dependencies>

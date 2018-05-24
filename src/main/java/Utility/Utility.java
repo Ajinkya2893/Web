@@ -3,8 +3,12 @@ package Utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -14,8 +18,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 
 public class Utility {
 
@@ -117,6 +127,55 @@ public class Utility {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return msg = "Unable to take the screenshot " + Constants.FAIL;
+		}
+	}
+	
+	public String getOtpNumber() {
+		String encrypted;
+		String body;
+		String otp = "";
+		try {
+			RestAssured.baseURI = "https://panel.pay1.in";
+			RestAssured.basePath = "/platform/apis/";
+
+			ObjectMapper om = new ObjectMapper();
+			om.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS,false);
+
+			SortedMap<String,String> sortedMap = new TreeMap<String,String>();
+			Map<String,String> map = new HashMap<String,String>();
+
+			map.put("method","getOTPforTest");
+			if(prop.getProperty("Live_url").contains("shop")) {
+				map.put("app_name","recharge_app");
+			}else if (prop.getProperty("Live_url").contains("remit")) {
+				map.put("app_name","dmt");
+			}
+			map.put("mobile","7101000521");
+
+			sortedMap.putAll(map);
+			encrypted = new AESCrypt("Live").encrypt(om.writeValueAsString(sortedMap));
+
+			Response response  = RestAssured.given()
+					.param("req",encrypted)
+					.when()
+					.post()
+					.then()
+					.extract().response();
+
+			System.out.println(response.asString());
+			body = response.asString();
+
+			if("failure".equals(new JsonPath(body).get("status"))) {
+				System.out.println("Transaction Already Done");
+			}else if("success".equals(new JsonPath(body).get("status"))) {
+				otp = new JsonPath(body).get("otp");
+				System.out.println(otp);
+			}
+			return otp;
+		}
+		catch (Exception e) {
+			System.out.println("Error ");
+			return null;
 		}
 	}
 
