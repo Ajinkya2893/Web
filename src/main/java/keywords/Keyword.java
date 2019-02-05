@@ -65,15 +65,20 @@ public class Keyword {
 				else if(keyword.equals("Otp"))
 					result = app.AddSenderOTP(object, testData);
 				else if(keyword.equals("Loginotp"))
-					result = app.Loginotp();
+					result = app.Loginotp(data);
 				else if(keyword.equals("GetText"))
 					result = app.getText(object);
 				else if(keyword.equals("AcceptAlert"))
 					result = app.SwitchAlert(object);
 				else if(keyword.equals("getAlertText"))
 					result = app.getAlertText();
-				else if(keyword.equals("mobileTransactionDetails"))
-					result = app.getMobileTransactionDetails(object, testData);
+				else if(keyword.equals("checkTransactionStatus"))
+					result = app.checkTransactionStatus(object, testData);
+				else if(keyword.equals("verifyBalance/transfer"))
+					result=app.verifyBalanceDeduct(testData);
+				else if(keyword.equals("confirmTransaction"))
+					result=app.confirmTransaction();
+				
 
 				if(result != null) {
 					testResult = resultKeyword(xls, result, rNum);

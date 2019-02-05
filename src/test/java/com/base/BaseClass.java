@@ -29,12 +29,12 @@ public interface BaseClass {
 				test.log(LogStatus.INFO, DataUtils.testDescription(xls, testName));
 				System.out.println("Running this test "+testName);
 				app = new Keyword(test);
-				test.log(LogStatus.INFO, "Executing the keywords");
+				//test.log(LogStatus.INFO, "Executing the keywords");
 				msg = app.executeKeywords(testName, xls, data, path);
 			}
 			return msg;
 		} catch (AssertionError e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			msg = "Unable to execute any test from the Interface "+Constants.FAIL;
 			return msg;
 		}

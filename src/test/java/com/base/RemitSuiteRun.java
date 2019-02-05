@@ -2,6 +2,7 @@ package com.base;
 
 import java.io.File;
 
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -22,14 +23,14 @@ public class RemitSuiteRun {
 		if (!Zipfolder.isDirectory()) Zipfolder.delete();
 	}
 	
-	/*@AfterSuite
+	@AfterSuite
 	public void afterSuite() {
 		try {
 			rep.flush();
-			ZipUtil.pack(new File(Constants.SrcPath), new File(Constants.DesPath));
+			/*ZipUtil.pack(new File(Constants.SrcPath), new File(Constants.DesPath));
 			new SendMail().sendMail();
-		} catch (Exception e) {
+	*/	} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }

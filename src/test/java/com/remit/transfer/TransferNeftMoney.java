@@ -1,4 +1,4 @@
-package com.Shop.Reports;
+package com.remit.transfer;
 
 import java.util.Hashtable;
 
@@ -10,8 +10,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.base.BaseClass;
-import com.base.ShopSuiteRun;
-import com.relevantcodes.extentreports.ExtentTest;
+import com.base.RemitSuiteRun;
 import com.relevantcodes.extentreports.LogStatus;
 
 import Utility.Constants;
@@ -20,7 +19,7 @@ import Utility.Excel_Reader;
 import Utility.ExtentManager;
 import keywords.Keyword;
 
-public class PrepaidMobileReport extends ShopSuiteRun implements BaseClass{
+public class TransferNeftMoney extends RemitSuiteRun implements BaseClass{
 
 	static int count=-1;
 	static boolean skip=false;
@@ -29,32 +28,33 @@ public class PrepaidMobileReport extends ShopSuiteRun implements BaseClass{
 	static boolean isTestPass=false;
 	public String result;
 	public String msg ;
-	protected ExtentTest test;
 	protected Keyword app;
 	protected Excel_Reader xls ;
 	public String testName;
 	protected String objectRepoPath ;
 
-	private PrepaidMobileReport() {
-		testName = this.getClass().getSimpleName();
-		xls = new Excel_Reader(Constants.SHOP); // Loading the Excel Sheet
-		objectRepoPath = Constants.ShopProperties_file_path;
-		rep = ExtentManager.getInstance(Constants.SHOP_REPORT_PATH);
+	private TransferNeftMoney() {
+		testName = "TC_TransferNeftMoney";
+		xls = new Excel_Reader(Constants.Remit); // Loading the Excel Sheet
+		rep = ExtentManager.getInstance(Constants.REMIT_REPORT_PATH);
+		objectRepoPath = Constants.RemitProperties_file_path;
 	}
 
 	@Override@BeforeTest
 	public void testSkip() {
 		test  = rep.startTest(testName);
 		if (DataUtils.isSkip(xls, testName)){
-			DataUtils.reportDataSetResult(xls, "TestCases",DataUtils.getRowNum(xls,testName), "Skip");
+			DataUtils.reportFinalData(xls, "TestCases",DataUtils.getRowNum(xls,testName), "Skip");
 			test.log(LogStatus.SKIP, "Skipping the test as runmode is NO in the Excel Sheet");
+			rep.endTest(test);
+			rep.flush();
 			skip = true;
 			throw new SkipException("Skipping test case" + testName + " as runmode set to NO in excel");
 		} 
 	}
 
-	@Test(dataProvider="getData", priority=1)
-	public void DishTvRecharge(Hashtable<String,String> data) {
+	@Test(dataProvider="getData")
+	public void RemitTransMoney(Hashtable<String,String> data) {
 		try {
 			count++;
 			result = execute(data, test, app, xls, testName, objectRepoPath);
@@ -69,7 +69,7 @@ public class PrepaidMobileReport extends ShopSuiteRun implements BaseClass{
 				msg="Failed to excute the test";
 			}else if(result.endsWith(Constants.SKIP)) {
 				skip=true;
-				fail=false;
+				fail = false;
 				msg="Test Skipped as the Runmode is N in Data Sheet";
 			}
 		}catch(Exception e){

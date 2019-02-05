@@ -1,14 +1,9 @@
 package com.base;
 
-import java.io.File;
-
-import org.zeroturnaround.zip.ZipUtil;
+import org.testng.annotations.AfterSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
-
-import Utility.Constants;
-import Utility.SendMail;
 
 public class ShopSuiteRun {
 	
@@ -23,13 +18,13 @@ public class ShopSuiteRun {
 		if (!report.isDirectory()) report.delete();
 	}*/
 	
-	//@AfterSuite
+	@AfterSuite
 	public void afterSuite() {
 		try {
 			rep.flush();
-			ZipUtil.pack(new File(Constants.SrcPath), new File(Constants.DesPath));
+			/*ZipUtil.pack(new File(Constants.SrcPath), new File(Constants.DesPath));
 			new SendMail().sendMail();
-		} catch (Exception e) {
+	*/	} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

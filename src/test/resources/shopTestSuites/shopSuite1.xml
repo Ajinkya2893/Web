@@ -7,15 +7,33 @@
 		</classes>
 	</test>
 
+	<test name="Prepaid Mobile Recharge Verification">
+		<classes>
+			<class name="com.Shop.Reports.TC_PrepaidMobileReport"></class>
+		</classes>
+	</test>
+
 	<test name="Postpaid Mobile Recharge">
 		<classes>
 			<class name="com.Shop.mobileRecharge.TC_PostpaidMobile"></class>
 		</classes>
 	</test>
 
+	<test name="PostPaid Mobile Recharge Verification">
+		<classes>
+			<class name="com.Shop.Reports.TC_PostpaidMobileReport"></class>
+		</classes>
+	</test>
+
 	<test name="DTH Recharge">
 		<classes>
 			<class name="com.Shop.dthRecharge.TC_DthRecharge"></class>
+		</classes>
+	</test>
+
+	<test name="DTH Recharge Verification">
+		<classes>
+			<class name="com.Shop.Reports.TC_DthRechargeReport"></class>
 		</classes>
 	</test>
 

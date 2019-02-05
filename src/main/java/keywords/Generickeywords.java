@@ -8,10 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -21,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import Utility.Constants;
 import Utility.Utility;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Generickeywords extends Utility{
 	public static String end ="";
@@ -36,7 +34,7 @@ public class Generickeywords extends Utility{
 	/******************************Opening Browser functions******************************/
 
 	public String openBrowser(String browserType){
-		test.log(LogStatus.INFO, "Starting "+browserType+ " Browser");
+		//test.log(LogStatus.INFO, "Starting "+browserType+ " Browser");
 		try {
 			if(prop.getProperty("grid").equalsIgnoreCase("Y")){
 				DesiredCapabilities cap=null;
@@ -57,24 +55,16 @@ public class Generickeywords extends Utility{
 			else{		
 				if(browserType!=null){
 					if(browserType.equalsIgnoreCase("Mozilla")){
-						FirefoxBinary firefoxBinary = new FirefoxBinary();
-					    firefoxBinary.addCommandLineOptions("--headless");
-						System.setProperty("webdriver.gecko.driver",Constants.GeckoDriver_path);
-						System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
-						System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
-					    FirefoxOptions firefoxOptions = new FirefoxOptions();
-					    firefoxOptions.setBinary(firefoxBinary);
-						driver = new FirefoxDriver(firefoxOptions);
+						WebDriverManager.firefoxdriver().setup();
+						driver = new FirefoxDriver();
 						msg = "Successfully created a instance of Mozilla ";test.log(LogStatus.INFO, msg);
 					}else if(browserType.equalsIgnoreCase("Chrome")){
-						System.setProperty("webdriver.chrome.driver", Constants.ChromeDriver_path);
-						ChromeOptions ChromeOptions = new ChromeOptions();
-						//ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
-						driver = new ChromeDriver(ChromeOptions);
+						WebDriverManager.chromedriver().setup();
+						driver = new ChromeDriver();
 						msg = "Successfully created a instance of chrome ";test.log(LogStatus.INFO, msg);
 					}else if(browserType.equalsIgnoreCase("ie")){
-						System.setProperty("webdriver.ie.driver", "F:\\drivers\\IEDriverServer.exe");
-						driver =  new InternetExplorerDriver();
+						WebDriverManager.iedriver().setup();
+						driver = new InternetExplorerDriver();
 						msg= "Successfully created a instance of IE ";test.log(LogStatus.INFO, msg);
 					}
 				}else{
@@ -107,9 +97,15 @@ public class Generickeywords extends Utility{
 	public String navigateTo(String url){
 		try {
 
-			if(url!=null){
-				driver.get(prop.getProperty("Live_url"));
+			if(prop.getProperty(url)!=null){
+				driver.navigate().to(prop.getProperty(url));
 				msg = "Successfully navigated to "+url+" ";
+				test.log(LogStatus.PASS, msg);
+				return msg + Constants.PASS;
+			}
+			else if(prop.getProperty(url)==null) {
+				driver.navigate().to(prop.getProperty("Live_url"));
+				msg = "Successfully navigated to "+prop.getProperty("Live_url")+" ";
 				test.log(LogStatus.PASS, msg);
 				return msg + Constants.PASS;
 			}
@@ -150,7 +146,7 @@ public class Generickeywords extends Utility{
 				return msg + Constants.FAIL;
 			}	
 		}catch(Exception e) {
-			msg="No such object is present to click "+objectToBeClicked +" ";
+			msg="No such object is present in the property file "+objectToBeClicked +" ";
 			test.log(LogStatus.ERROR, msg);
 			takeScreenShot(msg);
 			return msg + Constants.FAIL;

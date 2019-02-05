@@ -16,6 +16,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,7 +54,7 @@ public class Utility {
 			WebElement e = getElement(locatorKey);
 			String actualText = e.getText();
 			System.out.println(actualText +"====="+ expectedText);
-			if(actualText.equals(expectedText)) {
+			if(actualText.equalsIgnoreCase(expectedText)) {
 				test.log(LogStatus.PASS, "Text are verifed ");
 				return msg = "Text is verified " + Constants.PASS;
 			}
@@ -72,6 +74,7 @@ public class Utility {
 	public WebElement getElement(String locatorKey){
 		WebElement e = null;
 		try{
+			//Wait(locatorKey);
 			if(locatorKey.endsWith("_id"))
 				e = driver.findElement(By.id(prop.getProperty(locatorKey)));
 			else if(locatorKey.endsWith("_xpath"))
@@ -130,7 +133,7 @@ public class Utility {
 		}
 	}
 	
-	public String getOtpNumber() {
+	public String getOtpNumber(String number) {
 		String encrypted;
 		String body;
 		String otp = "";
@@ -150,7 +153,7 @@ public class Utility {
 			}else if (prop.getProperty("Live_url").contains("remit")) {
 				map.put("app_name","dmt");
 			}
-			map.put("mobile","7101000521");
+			map.put("mobile",number);
 
 			sortedMap.putAll(map);
 			encrypted = new AESCrypt("Live").encrypt(om.writeValueAsString(sortedMap));
@@ -176,6 +179,22 @@ public class Utility {
 		catch (Exception e) {
 			System.out.println("Error ");
 			return null;
+		}
+	}
+	
+	public void Wait(String locatorKey) {
+		try{
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			
+			if(locatorKey.endsWith("_id"))
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locatorKey)));
+			else if(locatorKey.endsWith("_xpath"))
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locatorKey)));
+			else if(locatorKey.endsWith("_name"))
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(locatorKey)));
+		}catch(Exception ex){
+			ex.printStackTrace();
+			Assert.fail("Failure in Element Extraction - "+ locatorKey);
 		}
 	}
 
